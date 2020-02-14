@@ -18,10 +18,14 @@ import android.widget.Toast;
 
 
 
+
+
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) //这是初始化页面的方法
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -37,27 +41,27 @@ public class MainActivity extends AppCompatActivity {
     int size=30;
     public void bigger(View v)
     {
-        // 按钮对应的 onclick 响应
+        // 放大按钮对应的 onclick 响应的方法
         TextView txv;
         txv= findViewById(R.id.txv);  // 根据ID找到对应的text对象
         txv.setTextSize(++size);       // 修改对象的字符大小-size
     }
     public void smaller(View v)
     {
-        // 按钮对应的 onclick 响应
+        // 缩小按钮对应的 onclick 响应的方法
         TextView txv;
         txv= findViewById(R.id.txv);  // 根据ID找到对应的text对象
         txv.setTextSize(--size);       // 修改对象的字符大小-size
     }
     public void display(View v)
-    {     // 另外一个按钮对应的 onclick 响应
+    {     // 显示按钮对应的 onclick 响应的方法
         EditText name= findViewById(R.id.name);  //还是根据ID找到对象，并进行接下来的操作
         TextView text2=  findViewById(R.id.txv);
         text2.setText(name.getText().toString());// 设置字符
     }
 
     public void click(View v)
-    {
+    {//点击设置中的窗口对应的方法
         switch (v.getId())
         {
             case R.id.btn_4:
@@ -69,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     int ide = 0;  //全局变量
-    private void showSingleDialog() {
+    private void showSingleDialog()
+    {
         final String[] size = {"小", "中", "大"};
         final AlertDialog.Builder dialog4 = new AlertDialog.Builder(this)
                 .setTitle("选择字体大小:")//参数1：选项
@@ -92,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
         dialog4.show();
     }
-    private void showWaitDialog() {
+
+    private void showWaitDialog()
+    {
         //进度条对话框，默认是转圈
         final ProgressDialog dialog = ProgressDialog.show(this, "正在清理",
                 "请稍等 …", true, true);
@@ -111,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 Looper.loop();//类似上下文切换
             }
         });
-
         t1.start();
     }
 }
