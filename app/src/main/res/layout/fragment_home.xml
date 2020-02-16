@@ -8,14 +8,9 @@
     <TextView
         android:id="@+id/text_home"
         android:layout_width="413dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="161dp"
+        android:layout_height="27dp"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -32,6 +27,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="translate"
         android:text="移动"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -47,13 +43,134 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/white_king"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="207dp"
         android:layout_marginLeft="22dp"
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/white_king" />
+
+    <ImageView
+        android:id="@+id/white_queen"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_queen" />
+
+    <ImageView
+        android:id="@+id/white_bishop"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_bishop" />
+
+    <ImageView
+        android:id="@+id/white_knight"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_knight" />
+
+    <ImageView
+        android:id="@+id/white_rook"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_rook" />
+
+    <ImageView
+        android:id="@+id/white_pawn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/black_rook"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="345dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_rook" />
+
+    <ImageView
+        android:id="@+id/black_pawn"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/black_knight"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="345dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_knight" />
+
+    <ImageView
+        android:id="@+id/black_bishop"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="345dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_bishop" />
+
+    <ImageView
+        android:id="@+id/black_queen"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="345dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_queen" />
+
+    <ImageView
+        android:id="@+id/black_king"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="207dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="345dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_king" />
 </androidx.constraintlayout.widget.ConstraintLayout>
