@@ -38,12 +38,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="输入移动步骤"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
-        android:id="@+id/white_king"
+        android:id="@+id/black_king1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="207dp"
@@ -51,10 +51,10 @@
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_king" />
+        app:srcCompat="@drawable/black_king" />
 
     <ImageView
-        android:id="@+id/white_queen"
+        android:id="@+id/black_queen1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="160dp"
@@ -62,10 +62,10 @@
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_queen" />
+        app:srcCompat="@drawable/black_queen" />
 
     <ImageView
-        android:id="@+id/white_bishop"
+        android:id="@+id/black_bishop1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="114dp"
@@ -73,10 +73,21 @@
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_bishop" />
+        app:srcCompat="@drawable/black_bishop" />
 
     <ImageView
-        android:id="@+id/white_knight"
+        android:id="@+id/black_bishop2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="253dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_bishop" />
+
+    <ImageView
+        android:id="@+id/black_knight1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="68dp"
@@ -84,10 +95,21 @@
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_knight" />
+        app:srcCompat="@drawable/black_knight" />
 
     <ImageView
-        android:id="@+id/white_rook"
+        android:id="@+id/black_knight2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="299dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_knight" />
+
+    <ImageView
+        android:id="@+id/black_rook1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="22dp"
@@ -95,10 +117,21 @@
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_rook" />
+        app:srcCompat="@drawable/black_rook" />
 
     <ImageView
-        android:id="@+id/white_pawn"
+        android:id="@+id/black_rook2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="345dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_rook" />
+
+    <ImageView
+        android:id="@+id/black_pawn1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="22dp"
@@ -106,10 +139,87 @@
         android:layout_marginTop="68dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/white_pawn" />
+        app:srcCompat="@drawable/black_pawn" />
 
     <ImageView
-        android:id="@+id/black_rook"
+        android:id="@+id/black_pawn2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/black_pawn3"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/black_pawn4"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/black_pawn5"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="207dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/black_pawn6"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/black_pawn7"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="299dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/black_pawn8"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="345dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/black_pawn" />
+
+    <ImageView
+        android:id="@+id/white_rook1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="22dp"
@@ -117,21 +227,21 @@
         android:layout_marginTop="345dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_rook" />
+        app:srcCompat="@drawable/white_rook" />
 
     <ImageView
-        android:id="@+id/black_pawn"
+        android:id="@+id/white_rook2"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="345dp"
         android:layout_marginLeft="22dp"
-        android:layout_marginTop="298dp"
+        android:layout_marginTop="345dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_pawn" />
+        app:srcCompat="@drawable/white_rook" />
 
     <ImageView
-        android:id="@+id/black_knight"
+        android:id="@+id/white_knight1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="68dp"
@@ -139,10 +249,21 @@
         android:layout_marginTop="345dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_knight" />
+        app:srcCompat="@drawable/white_knight" />
 
     <ImageView
-        android:id="@+id/black_bishop"
+        android:id="@+id/white_knight2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="299dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="345dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_knight" />
+
+    <ImageView
+        android:id="@+id/white_bishop1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="114dp"
@@ -150,10 +271,21 @@
         android:layout_marginTop="345dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_bishop" />
+        app:srcCompat="@drawable/white_bishop" />
 
     <ImageView
-        android:id="@+id/black_queen"
+        android:id="@+id/white_bishop2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="253dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="345dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_bishop" />
+
+    <ImageView
+        android:id="@+id/white_queen1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="160dp"
@@ -161,10 +293,10 @@
         android:layout_marginTop="345dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_queen" />
+        app:srcCompat="@drawable/white_queen" />
 
     <ImageView
-        android:id="@+id/black_king"
+        android:id="@+id/white_king1"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginStart="207dp"
@@ -172,5 +304,93 @@
         android:layout_marginTop="345dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_king" />
+        app:srcCompat="@drawable/white_king" />
+
+    <ImageView
+        android:id="@+id/white_pawn1"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/white_pawn2"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/white_pawn3"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/white_pawn4"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/white_pawn5"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="206dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/white_pawn6"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/white_pawn7"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="299dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
+
+    <ImageView
+        android:id="@+id/white_pawn8"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="345dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="298dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_pawn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
