@@ -18,9 +18,7 @@ import android.app.ProgressDialog;
 import android.widget.Toast;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-
-
-
+import android.content.Context;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
-
     int size = 30;
 
     public void bigger(View v)//虽然下面没有用到View v，但是不加就报错
@@ -116,81 +113,85 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
     }
 
-    //注意 左上角是（0，0），横轴是X轴，纵轴是Y轴,一个格子长度是120单位，但是布局中一个格子长度是46dp
-    int goal_x = 0, goal_y = 0;//棋子移动的目标位置
-    int black_king1_x = 480, black_king1_y = 0;//黑棋国王1的当前位置
-    int black_queen1_x = 360, black_queen1_y = 0;//黑棋皇后1的当前位置
+    public  int dip2px(Context context, float dpValue)
+    {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+    int square;
+    //注意 左上角是（0，0），横轴是X轴，纵轴是Y轴,一个格子长度是square单位，但是布局中一个格子长度是40dp
+    int goal_x, goal_y;//棋子移动的目标位置
+    int black_king1_x = 4 * square, black_king1_y = 0;//黑棋国王1的当前位置
+    int black_queen1_x = 3 * square, black_queen1_y = 0;//黑棋皇后1的当前位置
     int black_rook1_x = 0, black_rook1_y = 0;//黑棋战车1的当前位置
-    int black_rook2_x = 840, black_rook2_y = 0;//黑棋战车2的当前位置
-    int black_bishop1_x = 240, black_bishop1_y = 0;//黑棋主教1的当前位置
-    int black_bishop2_x = 600, black_bishop2_y = 0;//黑棋主教2的当前位置
-    int black_knight1_x = 360, black_knight1_y = 0;//黑棋骑士1的当前位置
-    int black_knight2_x = 480, black_knight2_y = 0;//黑棋骑士2的当前位置
-    int black_pawn1_x = 0, black_pawn1_y = 120;//黑棋禁卫军1的当前位置
-    int black_pawn2_x = 120, black_pawn2_y = 120;//黑棋禁卫军2的当前位置
-    int black_pawn3_x = 240, black_pawn3_y = 120;//黑棋禁卫军3的当前位置
-    int black_pawn4_x = 360, black_pawn4_y = 120;//黑棋禁卫军4的当前位置
-    int black_pawn5_x = 480, black_pawn5_y = 120;//黑棋禁卫军5的当前位置
-    int black_pawn6_x = 600, black_pawn6_y = 120;//黑棋禁卫军6的当前位置
-    int black_pawn7_x = 720, black_pawn7_y = 120;//黑棋禁卫军7的当前位置
-    int black_pawn8_x = 840, black_pawn8_y = 120;//黑棋禁卫军8的当前位置
+    int black_rook2_x = 7 * square, black_rook2_y = 0;//黑棋战车2的当前位置
+    int black_bishop1_x = 2 * square, black_bishop1_y = 0;//黑棋主教1的当前位置
+    int black_bishop2_x = 5 * square, black_bishop2_y = 0;//黑棋主教2的当前位置
+    int black_knight1_x = 3 * square, black_knight1_y = 0;//黑棋骑士1的当前位置
+    int black_knight2_x = 4 * square, black_knight2_y = 0;//黑棋骑士2的当前位置
+    int black_pawn1_x = 0, black_pawn1_y = square;//黑棋禁卫军1的当前位置
+    int black_pawn2_x = square, black_pawn2_y = square;//黑棋禁卫军2的当前位置
+    int black_pawn3_x = 2 * square, black_pawn3_y = square;//黑棋禁卫军3的当前位置
+    int black_pawn4_x = 3 * square, black_pawn4_y = square;//黑棋禁卫军4的当前位置
+    int black_pawn5_x = 4 * square, black_pawn5_y = square;//黑棋禁卫军5的当前位置
+    int black_pawn6_x = 5 * square, black_pawn6_y = square;//黑棋禁卫军6的当前位置
+    int black_pawn7_x = 6 * square, black_pawn7_y = square;//黑棋禁卫军7的当前位置
+    int black_pawn8_x = 7 * square, black_pawn8_y = square;//黑棋禁卫军8的当前位置
 
-    int white_king1_x = 480, white_king1_y = 840;//白棋国王1的当前位置
-    int white_queen1_x = 360, white_queen1_y = 840;//白棋皇后1的当前位置
-    int white_rook1_x = 0, white_rook1_y = 840;//白棋战车1的当前位置
-    int white_rook2_x = 840, white_rook2_y = 840;//白棋战车2的当前位置
-    int white_bishop1_x = 120, white_bishop1_y = 840;//白棋主教1的当前位置
-    int white_bishop2_x = 720, white_bishop2_y = 840;//白棋主教2的当前位置
-    int white_knight1_x = 240, white_knight1_y = 840;//白棋骑士1的当前位置
-    int white_knight2_x = 600, white_knight2_y = 840;//白棋骑士2的当前位置
-    int white_pawn1_x = 0, white_pawn1_y = 720;//白棋禁卫军1的当前位置
-    int white_pawn2_x = 120, white_pawn2_y = 720;//白棋禁卫军2的当前位置
-    int white_pawn3_x = 240, white_pawn3_y = 720;//白棋禁卫军3的当前位置
-    int white_pawn4_x = 360, white_pawn4_y = 720;//白棋禁卫军4的当前位置
-    int white_pawn5_x = 480, white_pawn5_y = 720;//白棋禁卫军5的当前位置
-    int white_pawn6_x = 600, white_pawn6_y = 720;//白棋禁卫军6的当前位置
-    int white_pawn7_x = 720, white_pawn7_y = 720;//白棋禁卫军7的当前位置
-    int white_pawn8_x = 840, white_pawn8_y = 720;//白棋禁卫军8的当前位置
+    int white_king1_x = 4 * square, white_king1_y = 7 * square;//白棋国王1的当前位置
+    int white_queen1_x = 3 * square, white_queen1_y = 7 * square;//白棋皇后1的当前位置
+    int white_rook1_x = 0, white_rook1_y = 7 * square;//白棋战车1的当前位置
+    int white_rook2_x = 7 * square, white_rook2_y = 7 * square;//白棋战车2的当前位置
+    int white_bishop1_x = square, white_bishop1_y = 7 * square;//白棋主教1的当前位置
+    int white_bishop2_x = 6 * square, white_bishop2_y = 7 * square;//白棋主教2的当前位置
+    int white_knight1_x = 2 * square, white_knight1_y = 7 * square;//白棋骑士1的当前位置
+    int white_knight2_x = 5 * square, white_knight2_y = 7 * square;//白棋骑士2的当前位置
+    int white_pawn1_x = 0, white_pawn1_y = 6 * square;//白棋禁卫军1的当前位置
+    int white_pawn2_x = square, white_pawn2_y = 6 * square;//白棋禁卫军2的当前位置
+    int white_pawn3_x = 2 * square, white_pawn3_y = 6 * square;//白棋禁卫军3的当前位置
+    int white_pawn4_x = 3 * square, white_pawn4_y = 6 * square;//白棋禁卫军4的当前位置
+    int white_pawn5_x = 4 * square, white_pawn5_y = 6 * square;//白棋禁卫军5的当前位置
+    int white_pawn6_x = 5 * square, white_pawn6_y = 6 * square;//白棋禁卫军6的当前位置
+    int white_pawn7_x = 6 * square, white_pawn7_y = 6 * square;//白棋禁卫军7的当前位置
+    int white_pawn8_x = 7 * square, white_pawn8_y = 6 * square;//白棋禁卫军8的当前位置
 
 
 
     //注意动画的移动是以最开始的位置为原点，为了使得原点改为棋盘的最左上角，需要减去初始位置
-    int initial_black_king1_x = 480, initial_black_king1_y = 0;//黑棋国王1的初始位置
-    int initial_black_queen1_x = 360, initial_black_queen1_y = 0;//黑棋皇后1的初始位置
+    int initial_black_king1_x = 4 * square, initial_black_king1_y = 0;//黑棋国王1的初始位置
+    int initial_black_queen1_x = 3 * square, initial_black_queen1_y = 0;//黑棋皇后1的初始位置
     int initial_black_rook1_x = 0, initial_black_rook1_y = 0;//黑棋战车1的初始位置
-    int initial_black_rook2_x = 840, initial_black_rook2_y = 0;//黑棋战车2的初始位置
-    int initial_black_bishop1_x = 240, initial_black_bishop1_y = 0;//黑棋主教1的初始位置
-    int initial_black_bishop2_x = 600, initial_black_bishop2_y = 0;//黑棋主教2的初始位置
-    int initial_black_knight1_x = 360, initial_black_knight1_y = 0;//黑棋骑士1的初始位置
-    int initial_black_knight2_x = 480, initial_black_knight2_y = 0;//黑棋骑士2的初始位置
-    int initial_black_pawn1_x = 0, initial_black_pawn1_y = 120;//黑棋禁卫军1的初始位置
-    int initial_black_pawn2_x = 120, initial_black_pawn2_y = 120;//黑棋禁卫军2的初始位置
-    int initial_black_pawn3_x = 240, initial_black_pawn3_y = 120;//黑棋禁卫军3的初始位置
-    int initial_black_pawn4_x = 360, initial_black_pawn4_y = 120;//黑棋禁卫军4的初始位置
-    int initial_black_pawn5_x = 480, initial_black_pawn5_y = 120;//黑棋禁卫军5的初始位置
-    int initial_black_pawn6_x = 600, initial_black_pawn6_y = 120;//黑棋禁卫军6的初始位置
-    int initial_black_pawn7_x = 720, initial_black_pawn7_y = 120;//黑棋禁卫军7的初始位置
-    int initial_black_pawn8_x = 840, initial_black_pawn8_y = 120;//黑棋禁卫军8的初始位置
+    int initial_black_rook2_x = 7 * square, initial_black_rook2_y = 0;//黑棋战车2的初始位置
+    int initial_black_bishop1_x = 2 * square, initial_black_bishop1_y = 0;//黑棋主教1的初始位置
+    int initial_black_bishop2_x = 5 * square, initial_black_bishop2_y = 0;//黑棋主教2的初始位置
+    int initial_black_knight1_x = 3 * square, initial_black_knight1_y = 0;//黑棋骑士1的初始位置
+    int initial_black_knight2_x = 4 * square, initial_black_knight2_y = 0;//黑棋骑士2的初始位置
+    int initial_black_pawn1_x = 0, initial_black_pawn1_y = square;//黑棋禁卫军1的初始位置
+    int initial_black_pawn2_x = square, initial_black_pawn2_y = square;//黑棋禁卫军2的初始位置
+    int initial_black_pawn3_x = 2 * square, initial_black_pawn3_y = square;//黑棋禁卫军3的初始位置
+    int initial_black_pawn4_x = 3 * square, initial_black_pawn4_y = square;//黑棋禁卫军4的初始位置
+    int initial_black_pawn5_x = 4 * square, initial_black_pawn5_y = square;//黑棋禁卫军5的初始位置
+    int initial_black_pawn6_x = 5 * square, initial_black_pawn6_y = square;//黑棋禁卫军6的初始位置
+    int initial_black_pawn7_x = 6 * square, initial_black_pawn7_y = square;//黑棋禁卫军7的初始位置
+    int initial_black_pawn8_x = 7 * square, initial_black_pawn8_y = square;//黑棋禁卫军8的初始位置
 
-    int initial_white_king1_x = 480, initial_white_king1_y = 840;//白棋国王1的初始位置
-    int initial_white_queen1_x = 360, initial_white_queen1_y = 840;//白棋皇后1的初始位置
-    int initial_white_rook1_x = 0, initial_white_rook1_y = 840;//白棋战车1的初始位置
-    int initial_white_rook2_x = 840, initial_white_rook2_y = 840;//白棋战车2的初始位置
-    int initial_white_bishop1_x = 120, initial_white_bishop1_y = 840;//白棋主教1的初始位置
-    int initial_white_bishop2_x = 720, initial_white_bishop2_y = 840;//白棋主教2的初始位置
-    int initial_white_knight1_x = 240, initial_white_knight1_y = 840;//白棋骑士1的初始位置
-    int initial_white_knight2_x = 600, initial_white_knight2_y = 840;//白棋骑士2的初始位置
-    int initial_white_pawn1_x = 0, initial_white_pawn1_y = 720;//白棋禁卫军1的初始位置
-    int initial_white_pawn2_x = 120, initial_white_pawn2_y = 720;//白棋禁卫军2的初始位置
-    int initial_white_pawn3_x = 240, initial_white_pawn3_y = 720;//白棋禁卫军3的初始位置
-    int initial_white_pawn4_x = 360, initial_white_pawn4_y = 720;//白棋禁卫军4的初始位置
-    int initial_white_pawn5_x = 480, initial_white_pawn5_y = 720;//白棋禁卫军5的初始位置
-    int initial_white_pawn6_x = 600, initial_white_pawn6_y = 720;//白棋禁卫军6的初始位置
-    int initial_white_pawn7_x = 720, initial_white_pawn7_y = 720;//白棋禁卫军7的初始位置
-    int initial_white_pawn8_x = 840, initial_white_pawn8_y = 720;//白棋禁卫军8的初始位置
-    
-    
-    
+    int initial_white_king1_x = 4 * square, initial_white_king1_y = 7 * square;//白棋国王1的初始位置
+    int initial_white_queen1_x = 3 * square, initial_white_queen1_y = 7 * square;//白棋皇后1的初始位置
+    int initial_white_rook1_x = 0, initial_white_rook1_y = 7 * square;//白棋战车1的初始位置
+    int initial_white_rook2_x = 7 * square, initial_white_rook2_y = 7 * square;//白棋战车2的初始位置
+    int initial_white_bishop1_x = square, initial_white_bishop1_y = 7 * square;//白棋主教1的初始位置
+    int initial_white_bishop2_x = 6 * square, initial_white_bishop2_y = 7 * square;//白棋主教2的初始位置
+    int initial_white_knight1_x = 2 * square, initial_white_knight1_y = 7 * square;//白棋骑士1的初始位置
+    int initial_white_knight2_x = 5 * square, initial_white_knight2_y = 7 * square;//白棋骑士2的初始位置
+    int initial_white_pawn1_x = 0, initial_white_pawn1_y = 6 * square;//白棋禁卫军1的初始位置
+    int initial_white_pawn2_x = square, initial_white_pawn2_y = 6 * square;//白棋禁卫军2的初始位置
+    int initial_white_pawn3_x = 2 * square, initial_white_pawn3_y = 6 * square;//白棋禁卫军3的初始位置
+    int initial_white_pawn4_x = 3 * square, initial_white_pawn4_y = 6 * square;//白棋禁卫军4的初始位置
+    int initial_white_pawn5_x = 4 * square, initial_white_pawn5_y = 6 * square;//白棋禁卫军5的初始位置
+    int initial_white_pawn6_x = 5 * square, initial_white_pawn6_y = 6 * square;//白棋禁卫军6的初始位置
+    int initial_white_pawn7_x = 6 * square, initial_white_pawn7_y = 6 * square;//白棋禁卫军7的初始位置
+    int initial_white_pawn8_x = 7 * square, initial_white_pawn8_y = 6 * square;//白棋禁卫军8的初始位置
+
     //为了区分同种棋子中的不同，标号从左到右为1，2...,小写为白方棋子，大写为黑方棋子
     //其中k1、q1、K1、Q1中的1没有实际意义，只是为了和其他棋子的储存方式对齐
     String[][] chessboard = {
@@ -247,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void translate(View v)//虽然下面没有用到View v，但是不加就报错
     {
+        int square =  dip2px(this,40f);
         String input = ((EditText) findViewById(R.id.editText)).getText().toString();
         char[] move = input.toCharArray(); //将字符串变量转换为字符数组
         //最先判断王车易位
@@ -254,10 +256,10 @@ public class MainActivity extends AppCompatActivity {
         {
             ImageView white_king1 = findViewById(R.id.white_king1);//图形
             ImageView white_rook2 = findViewById(R.id.white_rook2);//图形
-            ObjectAnimator translation_king = ObjectAnimator.ofFloat(white_king1, "translationX",0,240);
-            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(white_rook2, "translationX",0,-240);
-            white_king1_x = 720;
-            white_rook2_x = 600;
+            ObjectAnimator translation_king = ObjectAnimator.ofFloat(white_king1, "translationX",0,2 * square);
+            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(white_rook2, "translationX",0,-2 * square);
+            white_king1_x = 6 * square;
+            white_rook2_x = 5 * square;
             AnimatorSet animatorset = new AnimatorSet();//新建一个组合动画
             animatorset.play(translation_king).before(translation_rook);//方法还有with和after
             animatorset.setDuration(1000);//运行时间，ms为单位
@@ -267,10 +269,10 @@ public class MainActivity extends AppCompatActivity {
         {
             ImageView black_king1 = findViewById(R.id.black_king1);//图形
             ImageView black_rook2 = findViewById(R.id.black_rook2);//图形
-            ObjectAnimator translation_king = ObjectAnimator.ofFloat(black_king1, "translationX",0,240);
-            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(black_rook2, "translationX",0,-240);
-            black_king1_x = 720;
-            black_rook2_x = 600;
+            ObjectAnimator translation_king = ObjectAnimator.ofFloat(black_king1, "translationX",0,2 * square);
+            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(black_rook2, "translationX",0,-2 * square);
+            black_king1_x = 6 * square;
+            black_rook2_x = 5 * square;
             AnimatorSet animatorset = new AnimatorSet();//新建一个组合动画
             animatorset.play(translation_king).before(translation_rook);//方法还有with和after
             animatorset.setDuration(1000);//运行时间，ms为单位
@@ -280,10 +282,10 @@ public class MainActivity extends AppCompatActivity {
         {
             ImageView white_king1 = findViewById(R.id.white_king1);//图形
             ImageView white_rook1 = findViewById(R.id.white_rook1);//图形
-            ObjectAnimator translation_king = ObjectAnimator.ofFloat(white_king1, "translationX",0,-240);
-            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(white_rook1, "translationX",0,360);
-            white_king1_x = 240;
-            white_rook1_x = 360;
+            ObjectAnimator translation_king = ObjectAnimator.ofFloat(white_king1, "translationX",0,-2 * square);
+            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(white_rook1, "translationX",0,3 * square);
+            white_king1_x = 2 * square;
+            white_rook1_x = 3 * square;
             AnimatorSet animatorset = new AnimatorSet();//新建一个组合动画
             animatorset.play(translation_king).before(translation_rook);//方法还有with和after
             animatorset.setDuration(1000);//运行时间，ms为单位
@@ -293,10 +295,10 @@ public class MainActivity extends AppCompatActivity {
         {
             ImageView black_king1 = findViewById(R.id.black_king1);//图形
             ImageView black_rook1 = findViewById(R.id.black_rook1);//图形
-            ObjectAnimator translation_king = ObjectAnimator.ofFloat(black_king1, "translationX",0,-240);
-            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(black_rook1, "translationX",0,360);
-            black_king1_x = 240;
-            black_rook1_x = 360;
+            ObjectAnimator translation_king = ObjectAnimator.ofFloat(black_king1, "translationX",0,-2 * square);
+            ObjectAnimator translation_rook = ObjectAnimator.ofFloat(black_rook1, "translationX",0,3 * square);
+            black_king1_x = 2 * square;
+            black_rook1_x = 3 * square;
             AnimatorSet animatorset = new AnimatorSet();//新建一个组合动画
             animatorset.play(translation_king).before(translation_rook);//方法还有with和after
             animatorset.setDuration(1000);//运行时间，ms为单位
@@ -364,9 +366,9 @@ public class MainActivity extends AppCompatActivity {
                     case 'k'://表示选择的是国王
                     {
                         ImageView white_king1 = findViewById(R.id.white_king1);//图形
-                        goal_x = 120 * (move[2] - 'a');
-                        goal_y = 120 * ('8' - move[3]);
-                        chessboard[white_king1_y / 120][white_king1_x / 120] = "00";//注意！！！
+                        goal_x =  square * (move[2] - 'a');
+                        goal_y =  square * ('8' - move[3]);
+                        chessboard['8' - move[1]][move[0] - 'a'] = "00";
 
                         if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                         {
@@ -399,9 +401,9 @@ public class MainActivity extends AppCompatActivity {
                     case 'q'://表示选择的是皇后
                     {
                         ImageView white_queen1 = findViewById(R.id.white_queen1);//图形
-                        goal_x = 120 * (move[2] - 'a');
-                        goal_y = 120 * ('8' - move[3]);
-                        chessboard[white_queen1_y / 120][white_queen1_x / 120] = "00";//注意！！！
+                        goal_x = square * (move[2] - 'a');
+                        goal_y = square * ('8' - move[3]);
+                        chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                         if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                         {
@@ -436,9 +438,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView white_rook1 = findViewById(R.id.white_rook1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_rook1_y / 120][white_rook1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -469,9 +471,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView white_rook2 = findViewById(R.id.white_rook2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_rook2_y / 120][white_rook2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_rook2, "translationX",white_rook2_x-initial_white_rook2_x, goal_x-initial_white_rook2_x);
@@ -506,9 +508,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView white_knight1 = findViewById(R.id.white_knight1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_knight1_y / 120][white_knight1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -539,9 +541,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView white_knight2 = findViewById(R.id.white_knight2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_knight2_y / 120][white_knight2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_knight2, "translationX",white_knight2_x-initial_white_knight2_x, goal_x-initial_white_knight2_x);
@@ -576,9 +578,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView white_bishop1 = findViewById(R.id.white_bishop1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_bishop1_y / 120][white_bishop1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -609,9 +611,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView white_bishop2 = findViewById(R.id.white_bishop2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_bishop2_y / 120][white_bishop2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_bishop2, "translationX",white_bishop2_x-initial_white_bishop2_x, goal_x-initial_white_bishop2_x);
@@ -646,9 +648,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView white_pawn1 = findViewById(R.id.white_pawn1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn1_y / 120][white_pawn1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -679,9 +681,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView white_pawn2 = findViewById(R.id.white_pawn2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn2_y / 120][white_pawn2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_pawn2, "translationX",white_pawn2_x-initial_white_pawn2_x, goal_x-initial_white_pawn2_x);
@@ -711,9 +713,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='3')
                         {
                             ImageView white_pawn3 = findViewById(R.id.white_pawn3);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn3_y / 120][white_pawn3_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_pawn3, "translationX",white_pawn3_x-initial_white_pawn3_x, goal_x-initial_white_pawn3_x);
@@ -743,9 +745,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='4')
                         {
                             ImageView white_pawn4 = findViewById(R.id.white_pawn4);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn4_y / 120][white_pawn4_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_pawn4, "translationX",white_pawn4_x-initial_white_pawn4_x, goal_x-initial_white_pawn4_x);
@@ -775,9 +777,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='5')
                         {
                             ImageView white_pawn5 = findViewById(R.id.white_pawn5);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn5_y / 120][white_pawn5_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_pawn5, "translationX",white_pawn5_x-initial_white_pawn5_x, goal_x-initial_white_pawn5_x);
@@ -807,9 +809,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='6')
                         {
                             ImageView white_pawn6 = findViewById(R.id.white_pawn6);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn6_y / 120][white_pawn6_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_pawn6, "translationX",white_pawn6_x-initial_white_pawn6_x, goal_x-initial_white_pawn6_x);
@@ -839,9 +841,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='7')
                         {
                             ImageView white_pawn7 = findViewById(R.id.white_pawn7);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn7_y / 120][white_pawn7_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_pawn7, "translationX",white_pawn7_x-initial_white_pawn7_x, goal_x-initial_white_pawn7_x);
@@ -871,9 +873,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='8')
                         {
                             ImageView white_pawn8 = findViewById(R.id.white_pawn8);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[white_pawn8_y / 120][white_pawn8_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(white_pawn8, "translationX",white_pawn8_x-initial_white_pawn8_x, goal_x-initial_white_pawn8_x);
@@ -912,9 +914,9 @@ public class MainActivity extends AppCompatActivity {
                     case 'K'://表示选择的是国王
                     {
                         ImageView black_king1 = findViewById(R.id.black_king1);//图形
-                        goal_x = 120 * (move[2] - 'a');
-                        goal_y = 120 * ('8' - move[3]);
-                        chessboard[black_king1_y / 120][black_king1_x / 120] = "00";//注意！！！
+                        goal_x = square * (move[2] - 'a');
+                        goal_y = square * ('8' - move[3]);
+                        chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                         if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                         {
@@ -947,9 +949,9 @@ public class MainActivity extends AppCompatActivity {
                     case 'Q'://表示选择的是皇后
                     {
                         ImageView black_queen1 = findViewById(R.id.black_queen1);//图形
-                        goal_x = 120 * (move[2] - 'a');
-                        goal_y = 120 * ('8' - move[3]);
-                        chessboard[black_queen1_y / 120][black_queen1_x / 120] = "00";//注意！！！
+                        goal_x = square * (move[2] - 'a');
+                        goal_y = square * ('8' - move[3]);
+                        chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                         if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                         {
@@ -984,9 +986,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView black_rook1 = findViewById(R.id.black_rook1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_rook1_y / 120][black_rook1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -1017,9 +1019,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView black_rook2 = findViewById(R.id.black_rook2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_rook2_y / 120][black_rook2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_rook2, "translationX",black_rook2_x-initial_black_rook2_x, goal_x-initial_black_rook2_x);
@@ -1054,9 +1056,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView black_knight1 = findViewById(R.id.black_knight1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_knight1_y / 120][black_knight1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -1087,9 +1089,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView black_knight2 = findViewById(R.id.black_knight2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_knight2_y / 120][black_knight2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_knight2, "translationX",black_knight2_x-initial_black_knight2_x, goal_x-initial_black_knight2_x);
@@ -1124,9 +1126,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView black_bishop1 = findViewById(R.id.black_bishop1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_bishop1_y / 120][black_bishop1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -1157,9 +1159,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView black_bishop2 = findViewById(R.id.black_bishop2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_bishop2_y / 120][black_bishop2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_bishop2, "translationX",black_bishop2_x-initial_black_bishop2_x, goal_x-initial_black_bishop2_x);
@@ -1194,9 +1196,9 @@ public class MainActivity extends AppCompatActivity {
                         if (chessman[1]=='1')
                         {
                             ImageView black_pawn1 = findViewById(R.id.black_pawn1);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn1_y / 120][black_pawn1_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
 
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
@@ -1227,9 +1229,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='2')
                         {
                             ImageView black_pawn2 = findViewById(R.id.black_pawn2);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn2_y / 120][black_pawn2_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_pawn2, "translationX",black_pawn2_x-initial_black_pawn2_x, goal_x-initial_black_pawn2_x);
@@ -1259,9 +1261,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='3')
                         {
                             ImageView black_pawn3 = findViewById(R.id.black_pawn3);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn3_y / 120][black_pawn3_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_pawn3, "translationX",black_pawn3_x-initial_black_pawn3_x, goal_x-initial_black_pawn3_x);
@@ -1291,9 +1293,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='4')
                         {
                             ImageView black_pawn4 = findViewById(R.id.black_pawn4);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn4_y / 120][black_pawn4_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_pawn4, "translationX",black_pawn4_x-initial_black_pawn4_x, goal_x-initial_black_pawn4_x);
@@ -1323,9 +1325,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='5')
                         {
                             ImageView black_pawn5 = findViewById(R.id.black_pawn5);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn5_y / 120][black_pawn5_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_pawn5, "translationX",black_pawn5_x-initial_black_pawn5_x, goal_x-initial_black_pawn5_x);
@@ -1355,9 +1357,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='6')
                         {
                             ImageView black_pawn6 = findViewById(R.id.black_pawn6);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn6_y / 120][black_pawn6_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_pawn6, "translationX",black_pawn6_x-initial_black_pawn6_x, goal_x-initial_black_pawn6_x);
@@ -1387,9 +1389,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='7')
                         {
                             ImageView black_pawn7 = findViewById(R.id.black_pawn7);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn7_y / 120][black_pawn7_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_pawn7, "translationX",black_pawn7_x-initial_black_pawn7_x, goal_x-initial_black_pawn7_x);
@@ -1419,9 +1421,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (chessman[1]=='8')
                         {
                             ImageView black_pawn8 = findViewById(R.id.black_pawn8);//图形
-                            goal_x = 120 * (move[2] - 'a');
-                            goal_y = 120 * ('8' - move[3]);
-                            chessboard[black_pawn8_y / 120][black_pawn8_x / 120] = "00";//注意！！！
+                            goal_x = square * (move[2] - 'a');
+                            goal_y = square * ('8' - move[3]);
+                            chessboard['8' - move[1]][move[0] - 'a'] = "00";//注意！！！
                             if(!(chessboard['8' - move[3]][move[2] - 'a'].equals("00")))//此时目标位置有棋子，该棋子被吃
                             {
                                 ObjectAnimator translationX = ObjectAnimator.ofFloat(black_pawn8, "translationX",black_pawn8_x-initial_black_pawn8_x, goal_x-initial_black_pawn8_x);
