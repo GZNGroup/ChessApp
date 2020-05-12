@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public void showWaitDialog(View v)//虽然下面没有用到View v，但是不加就报错
     {
         //进度条对话框，默认是转圈
-        final ProgressDialog dialog = ProgressDialog.show(this, "正在清理",
+        final ProgressDialog dialog = ProgressDialog.show(this, "正在恢复",
                 "请稍等 …", true, true);
 
         Thread thread = new Thread(new Runnable() {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 dialog.dismiss();
                 Looper.prepare();//类似上下文切换，不加就报错
-                Toast.makeText(MainActivity.this, "缓存清理完毕", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "恢复默认设置完毕", Toast.LENGTH_LONG).show();
                 Looper.loop();//类似上下文切换，不加就报错
             }
         });
