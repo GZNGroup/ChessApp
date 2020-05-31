@@ -92,6 +92,90 @@ public class MainActivity extends AppCompatActivity {
 
     public void showWaitDialog(View v)//虽然下面没有用到View v，但是不加就报错
     {
+        //初始化，恢复默认设置
+        chessboard = new String[][]{
+                {"R1", "N1", "B1", "Q1", "K1", "B2", "N2", "R2"},
+                {"P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"},
+                {"00", "00", "00", "00", "00", "00", "00", "00"},
+                {"00", "00", "00", "00", "00", "00", "00", "00"},
+                {"00", "00", "00", "00", "00", "00", "00", "00"},
+                {"00", "00", "00", "00", "00", "00", "00", "00"},
+                {"p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"},
+                {"r1", "n1", "b1", "q1", "k1", "b2", "n2", "r2"}
+        };
+
+        square =  dip2px(this,40f);
+        black_king1_x = 4 * square;black_king1_y = 0;//黑棋国王1的当前位置
+        black_queen1_x = 3 * square; black_queen1_y = 0;//黑棋皇后1的当前位置
+        black_rook1_x = 0; black_rook1_y = 0;//黑棋战车1的当前位置
+        black_rook2_x = 7 * square; black_rook2_y = 0;//黑棋战车2的当前位置
+        black_bishop1_x = 2 * square; black_bishop1_y = 0;//黑棋主教1的当前位置
+        black_bishop2_x = 5 * square; black_bishop2_y = 0;//黑棋主教2的当前位置
+        black_knight1_x = square; black_knight1_y = 0;//黑棋骑士1的当前位置
+        black_knight2_x = 6 * square; black_knight2_y = 0;//黑棋骑士2的当前位置
+        black_pawn1_x = 0; black_pawn1_y = square;//黑棋禁卫军1的当前位置
+        black_pawn2_x = square; black_pawn2_y = square;//黑棋禁卫军2的当前位置
+        black_pawn3_x = 2 * square; black_pawn3_y = square;//黑棋禁卫军3的当前位置
+        black_pawn4_x = 3 * square; black_pawn4_y = square;//黑棋禁卫军4的当前位置
+        black_pawn5_x = 4 * square; black_pawn5_y = square;//黑棋禁卫军5的当前位置
+        black_pawn6_x = 5 * square; black_pawn6_y = square;//黑棋禁卫军6的当前位置
+        black_pawn7_x = 6 * square; black_pawn7_y = square;//黑棋禁卫军7的当前位置
+        black_pawn8_x = 7 * square; black_pawn8_y = square;//黑棋禁卫军8的当前位置
+
+        white_king1_x = 4 * square; white_king1_y = 7 * square;//白棋国王1的当前位置
+        white_queen1_x = 3 * square; white_queen1_y = 7 * square;//白棋皇后1的当前位置
+        white_rook1_x = 0; white_rook1_y = 7 * square;//白棋战车1的当前位置
+        white_rook2_x = 7 * square; white_rook2_y = 7 * square;//白棋战车2的当前位置
+        white_bishop1_x = 2 * square; white_bishop1_y = 7 * square;//白棋主教1的当前位置
+        white_bishop2_x = 5 * square; white_bishop2_y = 7 * square;//白棋主教2的当前位置
+        white_knight1_x = square; white_knight1_y = 7 * square;//白棋骑士1的当前位置
+        white_knight2_x = 6 * square; white_knight2_y = 7 * square;//白棋骑士2的当前位置
+        white_pawn1_x = 0; white_pawn1_y = 6 * square;//白棋禁卫军1的当前位置
+        white_pawn2_x = square; white_pawn2_y = 6 * square;//白棋禁卫军2的当前位置
+        white_pawn3_x = 2 * square; white_pawn3_y = 6 * square;//白棋禁卫军3的当前位置
+        white_pawn4_x = 3 * square; white_pawn4_y = 6 * square;//白棋禁卫军4的当前位置
+        white_pawn5_x = 4 * square; white_pawn5_y = 6 * square;//白棋禁卫军5的当前位置
+        white_pawn6_x = 5 * square; white_pawn6_y = 6 * square;//白棋禁卫军6的当前位置
+        white_pawn7_x = 6 * square; white_pawn7_y = 6 * square;//白棋禁卫军7的当前位置
+        white_pawn8_x = 7 * square; white_pawn8_y = 6 * square;//白棋禁卫军8的当前位置
+
+
+
+        //注意动画的移动是以最开始的位置为原点，为了使得原点改为棋盘的最左上角，需要减去初始位置
+        initial_black_king1_x = 4 * square; initial_black_king1_y = 0;//黑棋国王1的初始位置
+        initial_black_queen1_x = 3 * square; initial_black_queen1_y = 0;//黑棋皇后1的初始位置
+        initial_black_rook1_x = 0; initial_black_rook1_y = 0;//黑棋战车1的初始位置
+        initial_black_rook2_x = 7 * square; initial_black_rook2_y = 0;//黑棋战车2的初始位置
+        initial_black_bishop1_x = 2 * square; initial_black_bishop1_y = 0;//黑棋主教1的初始位置
+        initial_black_bishop2_x = 5 * square; initial_black_bishop2_y = 0;//黑棋主教2的初始位置
+        initial_black_knight1_x = square; initial_black_knight1_y = 0;//黑棋骑士1的初始位置
+        initial_black_knight2_x = 6 * square; initial_black_knight2_y = 0;//黑棋骑士2的初始位置
+        initial_black_pawn1_x = 0; initial_black_pawn1_y = square;//黑棋禁卫军1的初始位置
+        initial_black_pawn2_x = square; initial_black_pawn2_y = square;//黑棋禁卫军2的初始位置
+        initial_black_pawn3_x = 2 * square; initial_black_pawn3_y = square;//黑棋禁卫军3的初始位置
+        initial_black_pawn4_x = 3 * square; initial_black_pawn4_y = square;//黑棋禁卫军4的初始位置
+        initial_black_pawn5_x = 4 * square; initial_black_pawn5_y = square;//黑棋禁卫军5的初始位置
+        initial_black_pawn6_x = 5 * square; initial_black_pawn6_y = square;//黑棋禁卫军6的初始位置
+        initial_black_pawn7_x = 6 * square; initial_black_pawn7_y = square;//黑棋禁卫军7的初始位置
+        initial_black_pawn8_x = 7 * square; initial_black_pawn8_y = square;//黑棋禁卫军8的初始位置
+
+        initial_white_king1_x = 4 * square; initial_white_king1_y = 7 * square;//白棋国王1的初始位置
+        initial_white_queen1_x = 3 * square; initial_white_queen1_y = 7 * square;//白棋皇后1的初始位置
+        initial_white_rook1_x = 0; initial_white_rook1_y = 7 * square;//白棋战车1的初始位置
+        initial_white_rook2_x = 7 * square; initial_white_rook2_y = 7 * square;//白棋战车2的初始位置
+        initial_white_bishop1_x = 2 * square; initial_white_bishop1_y = 7 * square;//白棋主教1的初始位置
+        initial_white_bishop2_x = 5 * square; initial_white_bishop2_y = 7 * square;//白棋主教2的初始位置
+        initial_white_knight1_x = square; initial_white_knight1_y = 7 * square;//白棋骑士1的初始位置
+        initial_white_knight2_x = 6 * square; initial_white_knight2_y = 7 * square;//白棋骑士2的初始位置
+        initial_white_pawn1_x = 0; initial_white_pawn1_y = 6 * square;//白棋禁卫军1的初始位置
+        initial_white_pawn2_x = square; initial_white_pawn2_y = 6 * square;//白棋禁卫军2的初始位置
+        initial_white_pawn3_x = 2 * square; initial_white_pawn3_y = 6 * square;//白棋禁卫军3的初始位置
+        initial_white_pawn4_x = 3 * square; initial_white_pawn4_y = 6 * square;//白棋禁卫军4的初始位置
+        initial_white_pawn5_x = 4 * square; initial_white_pawn5_y = 6 * square;//白棋禁卫军5的初始位置
+        initial_white_pawn6_x = 5 * square; initial_white_pawn6_y = 6 * square;//白棋禁卫军6的初始位置
+        initial_white_pawn7_x = 6 * square; initial_white_pawn7_y = 6 * square;//白棋禁卫军7的初始位置
+        initial_white_pawn8_x = 7 * square; initial_white_pawn8_y = 6 * square;//白棋禁卫军8的初始位置
+
         //进度条对话框，默认是转圈
         final ProgressDialog dialog = ProgressDialog.show(this, "正在恢复",
                 "请稍等 …", true, true);
@@ -121,6 +205,8 @@ public class MainActivity extends AppCompatActivity {
     int square;//这里做了适配
     //注意 左上角是（0，0），横轴是X轴，纵轴是Y轴,一个格子长度是square单位，但是布局中一个格子长度是40dp
     int goal_x, goal_y;//棋子移动的目标位置
+
+    //注意：这里的赋值其实并没有意义，只是为了定义变量名而已，在适配按钮按下后才会进行赋值
     int black_king1_x = 4 * square, black_king1_y = 0;//黑棋国王1的当前位置
     int black_queen1_x = 3 * square, black_queen1_y = 0;//黑棋皇后1的当前位置
     int black_rook1_x = 0, black_rook1_y = 0;//黑棋战车1的当前位置
