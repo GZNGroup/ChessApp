@@ -1,7 +1,10 @@
 package com.example.myapplication3;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 import android.content.DialogInterface;
 import android.widget.EditText;
@@ -20,9 +23,13 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity
+{
+    int size = 30;
     @Override
     protected void onCreate(Bundle savedInstanceState) //这是初始化页面的方法
     {
@@ -31,14 +38,28 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+       // new  AlertDialog.Builder(this).setTitle("建议" ).setMessage("APP还没有适配手机，为了正常使用，建议立刻适配" ).setPositiveButton("立刻适配" , this. ).show();
+
+        new AlertDialog.Builder(this).setTitle("建议").setMessage("APP还没有适配手机，为了正常使用，建议立刻适配").setPositiveButton
+                ("确定",new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which){
+
+                        Adaptable();
+
+                        }
+                    }
+                ).show();
+
+
+
+
     }
-    int size = 30;
+
 
     public void bigger(View v)//虽然下面没有用到View v，但是不加就报错
     {
@@ -177,23 +198,29 @@ public class MainActivity extends AppCompatActivity {
         initial_white_pawn8_x = 7 * square; initial_white_pawn8_y = 6 * square;//白棋禁卫军8的初始位置
 
         //进度条对话框，默认是转圈
-        final ProgressDialog dialog = ProgressDialog.show(this, "正在恢复",
-                "请稍等 …", true, true);
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(3000);//让他显示3秒后再消失
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        final ProgressDialog dialog = ProgressDialog.show(this, "正在恢复", "请稍等 …", true, true);
+        Thread thread = new Thread
+        (
+            new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        Thread.sleep(3000);//让他显示3秒后再消失
+                    }
+                    catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    dialog.dismiss();
+                    Looper.prepare();//类似上下文切换，不加就报错
+                    Toast.makeText(MainActivity.this, "恢复默认设置完毕", Toast.LENGTH_LONG).show();
+                    Looper.loop();//类似上下文切换，不加就报错
                 }
-                dialog.dismiss();
-                Looper.prepare();//类似上下文切换，不加就报错
-                Toast.makeText(MainActivity.this, "恢复默认设置完毕", Toast.LENGTH_LONG).show();
-                Looper.loop();//类似上下文切换，不加就报错
             }
-        });
+        );
         thread.start();
     }
 
@@ -333,8 +360,32 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;//不会出现这种情况，因为该函数的前提是有棋子被吃
     }
+    int index = 0;
+    String[] ChessManual = {"a2a4", "a7a5", "b2b4", "a5b4"};
+    Timer timer=new Timer();
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() // 定义处理信息的方法
+    {
+        public void handleMessage(Message msg)
+        {
+            switch (msg.what)
+            {
+                case 1:
+                 {
+                     if(index == ChessManual.length)
+                     {
+                         break;
+                     }
+                     translate(ChessManual[index]);
+                     index++;
+                     break;
+                }
 
-    public void Adaptable(View v)//这是适配按钮，虽然下面没有用到View v，但是不加就报错
+            }
+            super.handleMessage(msg);
+        }
+    };
+    public void Adaptable()//这是适配
     {
         square =  dip2px(this,40f);
         //初始化
@@ -408,11 +459,29 @@ public class MainActivity extends AppCompatActivity {
         initial_white_pawn6_x = 5 * square; initial_white_pawn6_y = 6 * square;//白棋禁卫军6的初始位置
         initial_white_pawn7_x = 6 * square; initial_white_pawn7_y = 6 * square;//白棋禁卫军7的初始位置
         initial_white_pawn8_x = 7 * square; initial_white_pawn8_y = 6 * square;//白棋禁卫军8的初始位置
+
+
+        Toast.makeText(MainActivity.this, "已经成功适配", Toast.LENGTH_LONG).show();
+        timer.scheduleAtFixedRate(new TimerTask()
+        {
+            @Override
+            public void run()//注意，这里不能直接对UI操作，否则会页面混乱直接闪退
+            {
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+         }, 1000,2500);
+
+
     }
 
-    public void translate(View v)//虽然下面没有用到View v，但是不加就报错
+    public void translate(final String input)
     {
-        String input = ((EditText) findViewById(R.id.editText)).getText().toString();
+
+
+
+        //String input = ((EditText) findViewById(R.id.editText)).getText().toString();//读取字符框中的字符串
         char[] move = input.toCharArray(); //将字符串变量转换为字符数组
         //最先判断王车易位
         if(input.equals("0w00"))//白方短易位，不必考虑吃，且王和车都在初始位置
